@@ -1,9 +1,7 @@
 package ProgrammersSort;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Comparator;
 
 public class Problem42746 {
 	public static void main(String[] args) {
@@ -15,25 +13,21 @@ public class Problem42746 {
 
 class Solution2{
 	public String solution(int[] numbers) {
-		for(int i=0; i<numbers.length;i++) {
-			for(int j=i ; j<numbers.length-1 ; j++) {
-				
-				if(compare(numbers[j+1], numbers[j])) {
-					System.out.println(Arrays.toString(numbers));
-					int temp = numbers[j];
-					numbers[j] = numbers[j+1];
-					numbers[j+1] = temp;
-				}
+		Integer[] list = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
+		Arrays.sort(list, new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				String str1 = o1.toString() + o2.toString();
+				String str2 = o2.toString() + o1.toString();
+				if(Integer.parseInt(str1) >= Integer.parseInt(str2))
+					return -1;
+				else
+					return 1;
 			}
-		}
-		return "";
-	}
-	
-	private boolean compare(int a, int b) {
-		// 10*a+b - 10*b+a
-		if( a-b >= 0)
-			return true;
-		else
-			return false;
+		});
+		StringBuffer sb = new StringBuffer();
+		for(int i : list)
+			sb.append(String.valueOf(i));
+		return sb.toString();
 	}
 }
