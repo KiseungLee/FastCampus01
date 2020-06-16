@@ -53,7 +53,6 @@ public class Problem1325
 //			result[i] = hacking;
 //			max_hacking = Math.max(max_hacking, hacking);
 		}
-	    
 	    // 결과 출력
 	    for (int i = 0; i < result.length; i++)
 		{
